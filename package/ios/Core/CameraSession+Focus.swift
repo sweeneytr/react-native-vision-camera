@@ -35,12 +35,6 @@ extension CameraSession {
         device.focusMode = .autoFocus
       }
 
-      // Set Exposure
-      if device.isExposurePointOfInterestSupported {
-        device.exposurePointOfInterest = point
-        device.exposureMode = .autoExpose
-      }
-
       // Remove any existing listeners
       NotificationCenter.default.removeObserver(self,
                                                 name: NSNotification.Name.AVCaptureDeviceSubjectAreaDidChange,
@@ -71,11 +65,6 @@ extension CameraSession {
     // Reset Focus to continuous/auto
     if device.isFocusPointOfInterestSupported {
       device.focusMode = .continuousAutoFocus
-    }
-
-    // Reset Exposure to continuous/auto
-    if device.isExposurePointOfInterestSupported {
-      device.exposureMode = .continuousAutoExposure
     }
 
     // Disable listeners

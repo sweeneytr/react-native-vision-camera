@@ -274,9 +274,6 @@ extension CameraSession {
     if device.isFocusModeSupported(.continuousAutoFocus) {
       device.focusMode = .continuousAutoFocus
     }
-    if device.isExposureModeSupported(.continuousAutoExposure) {
-      device.exposureMode = .continuousAutoExposure
-    }
   }
 
   /**
@@ -318,12 +315,10 @@ extension CameraSession {
    Configures exposure (`exposure`) as a bias that adjusts exposureTime and ISO.
    */
   func configureExposure(configuration: CameraConfiguration, device: AVCaptureDevice) {
-    guard let exposure = configuration.exposure else {
-      return
-    }
-
-    let clamped = min(max(exposure, device.minExposureTargetBias), device.maxExposureTargetBias)
-    device.setExposureTargetBias(clamped)
+    device.setExposureModeCustom(
+        duration: CMTimeMake(value: 1,timescale: 100),
+        iso: max(device.activeFormat.maxISO, 1600)
+    )   
   }
 
   // pragma MARK: Audio
