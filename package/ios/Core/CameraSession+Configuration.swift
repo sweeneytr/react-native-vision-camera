@@ -317,7 +317,7 @@ extension CameraSession {
   func configureExposure(configuration: CameraConfiguration, device: AVCaptureDevice) {
     device.setExposureModeCustom(
         duration: CMTimeMake(value: 1,timescale: 100),
-        iso: max(device.activeFormat.maxISO, 1600)
+        iso: min(device.activeFormat.maxISO, 1600)
     )   
   }
 
