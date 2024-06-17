@@ -178,7 +178,7 @@
 				LastUpgradeCheck = 1250;
 				TargetAttributes = {
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = CJW62Q77E7;
+						DevelopmentTeam = G6F72PNCT5;
 						LastSwiftMigration = 1240;
 					};
 				};
@@ -226,7 +226,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+			shellScript = "export NODE_BINARY=/Users/tsweeney/.nvm/versions/node/v20.11.0/bin/node\n\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
 		5E303E5293C2545D8F744D87 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -405,7 +405,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = CJW62Q77E7;
+				DEVELOPMENT_TEAM = G6F72PNCT5;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = VisionCameraExample/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Vision Camera";
@@ -437,7 +437,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = CJW62Q77E7;
+				DEVELOPMENT_TEAM = G6F72PNCT5;
 				INFOPLIST_FILE = VisionCameraExample/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Vision Camera";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.photography";

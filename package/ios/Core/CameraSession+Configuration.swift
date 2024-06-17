@@ -71,6 +71,8 @@ extension CameraSession {
     if case let .enabled(photo) = configuration.photo {
       VisionLogger.log(level: .info, message: "Adding Photo output...")
 
+      captureSession.sessionPreset = .vga640x480
+
       // 1. Add
       let photoOutput = AVCapturePhotoOutput()
       guard captureSession.canAddOutput(photoOutput) else {
@@ -176,30 +178,11 @@ extension CameraSession {
   /**
    Configures the active format (`format`)
    */
-  func configureFormat(configuration: CameraConfiguration, device: AVCaptureDevice) throws {
+  func configureFormat(configuration: CameraConfiguration, device _: AVCaptureDevice) throws {
     guard let targetFormat = configuration.format else {
       // No format was set, just use the default.
       return
     }
-
-    VisionLogger.log(level: .info, message: "Configuring Format (\(targetFormat))...")
-
-    let currentFormat = CameraDeviceFormat(fromFormat: device.activeFormat)
-    if currentFormat == targetFormat {
-      VisionLogger.log(level: .info, message: "Already selected active format, no need to configure.")
-      return
-    }
-
-    // Find matching format (JS Dictionary -> strongly typed Swift class)
-    let format = device.formats.first { targetFormat.isEqualTo(format: $0) }
-    guard let format else {
-      throw CameraError.format(.invalidFormat)
-    }
-
-    // Set new device Format
-    device.activeFormat = format
-
-    VisionLogger.log(level: .info, message: "Successfully configured Format!")
   }
 
   func configureVideoOutputFormat(configuration: CameraConfiguration) {
@@ -224,19 +207,7 @@ extension CameraSession {
   }
 
   func configurePhotoOutputFormat(configuration _: CameraConfiguration) {
-    guard let videoDeviceInput, let photoOutput else {
-      // Photo is not enabled
-      return
-    }
-
-    // Configure the PhotoOutput Settings to use the given max-resolution.
-    // We need to run this after device.activeFormat has been set, otherwise the resolution is different.
-    let format = videoDeviceInput.device.activeFormat
-    if #available(iOS 16.0, *) {
-      photoOutput.maxPhotoDimensions = format.photoDimensions
-    } else {
-      photoOutput.isHighResolutionCaptureEnabled = true
-    }
+    
   }
 
   // pragma MARK: Side-Props
@@ -316,9 +287,9 @@ extension CameraSession {
    */
   func configureExposure(configuration: CameraConfiguration, device: AVCaptureDevice) {
     device.setExposureModeCustom(
-        duration: CMTimeMake(value: 1,timescale: 100),
-        iso: min(device.activeFormat.maxISO, 1600)
-    )   
+      duration: CMTimeMake(value: 1, timescale: 100),
+      iso: min(device.activeFormat.maxISO, 1600)
+    )
   }
 
   // pragma MARK: Audio

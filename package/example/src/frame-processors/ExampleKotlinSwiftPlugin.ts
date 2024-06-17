@@ -1,5 +1,5 @@
-import type { Frame } from 'react-native-vision-camera'
-import { VisionCameraProxy } from 'react-native-vision-camera'
+import type { Frame } from '@sweeneytr/react-native-vision-camera'
+import { VisionCameraProxy } from '@sweeneytr/react-native-vision-camera'
 
 const plugin = VisionCameraProxy.initFrameProcessorPlugin('example_kotlin_swift_plugin', { foo: 'bar' })
 
