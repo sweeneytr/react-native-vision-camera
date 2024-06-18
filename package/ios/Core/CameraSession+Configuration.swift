@@ -206,9 +206,7 @@ extension CameraSession {
     }
   }
 
-  func configurePhotoOutputFormat(configuration _: CameraConfiguration) {
-    
-  }
+  func configurePhotoOutputFormat(configuration _: CameraConfiguration) {}
 
   // pragma MARK: Side-Props
 
@@ -285,7 +283,7 @@ extension CameraSession {
   /**
    Configures exposure (`exposure`) as a bias that adjusts exposureTime and ISO.
    */
-  func configureExposure(configuration: CameraConfiguration, device: AVCaptureDevice) {
+  func configureExposure(configuration _: CameraConfiguration, device: AVCaptureDevice) {
     device.setExposureModeCustom(
       duration: CMTimeMake(value: 1, timescale: 100),
       iso: min(device.activeFormat.maxISO, 1600)
