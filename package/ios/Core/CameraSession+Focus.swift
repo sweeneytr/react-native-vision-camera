@@ -43,7 +43,7 @@ extension CameraSession {
           }
 
           if device.isFocusModeSupported(.continuousAutoFocus) {
-            device.focusMode = .continuousAutoFocus
+            device.focusMode = .autoFocus
           }
 
           if device.isAutoFocusRangeRestrictionSupported {
@@ -58,11 +58,11 @@ extension CameraSession {
                                                 object: nil)
 
       // Listen for focus completion
-      device.isSubjectAreaChangeMonitoringEnabled = true
-      NotificationCenter.default.addObserver(self,
-                                             selector: #selector(subjectAreaDidChange),
-                                             name: NSNotification.Name.AVCaptureDeviceSubjectAreaDidChange,
-                                             object: nil)
+      //device.isSubjectAreaChangeMonitoringEnabled = true
+      //NotificationCenter.default.addObserver(self,
+      //                                       selector: #selector(subjectAreaDidChange),
+      //                                       name: NSNotification.Name.AVCaptureDeviceSubjectAreaDidChange,
+      //                                       object: nil)
     } catch {
       throw CameraError.device(DeviceError.configureError)
     }
