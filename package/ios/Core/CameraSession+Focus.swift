@@ -32,7 +32,24 @@ extension CameraSession {
       // Set Focus
       if device.isFocusPointOfInterestSupported {
         device.focusPointOfInterest = point
-        device.focusMode = .autoFocus
+      }
+
+      if device.isLockingFocusWithCustomLensPositionSupported {
+        device.setFocusModeLocked(lensPosition: 1) { [weak self] _ in
+          guard let self = self else { return }
+          guard (try? device.lockForConfiguration()) != nil else { return }
+          defer {
+            device.unlockForConfiguration()
+          }
+
+          if device.isFocusModeSupported(.continuousAutoFocus) {
+            device.focusMode = .continuousAutoFocus
+          }
+
+          if device.isAutoFocusRangeRestrictionSupported {
+            device.autoFocusRangeRestriction = .far
+          }
+        }
       }
 
       // Remove any existing listeners

@@ -243,6 +243,10 @@ extension CameraSession {
     if device.isFocusModeSupported(.continuousAutoFocus) {
       device.focusMode = .continuousAutoFocus
     }
+
+    if device.isAutoFocusRangeRestrictionSupported {
+      device.autoFocusRangeRestriction = .far
+    }
   }
 
   /**
